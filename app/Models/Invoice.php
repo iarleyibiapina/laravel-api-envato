@@ -10,7 +10,7 @@ class Invoice extends Model
     use HasFactory;
 
 
-    public function custumers()
+    public function customers()
     {
         // relaçao de pertence a
         return $this->belongsTo(Customer::class);
