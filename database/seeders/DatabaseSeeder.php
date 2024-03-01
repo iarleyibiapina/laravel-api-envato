@@ -18,5 +18,13 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        // calling the customer seeder
+        $this->call([
+            CustomerSeeder::class,
+        ]);
+
+        // then call db:seeder
+        // or php artisan migrate:fresh --seed
     }
 }
