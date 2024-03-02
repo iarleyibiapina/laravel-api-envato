@@ -6,9 +6,9 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Filters\V1\CustomerFilter;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreCustomerRequest;
-use App\Http\Requests\UpdateCustomerRequest;
+use App\Http\Requests\V1\{StoreCustomerRequest, UpdateCustomerRequest};
 use App\Http\Resources\V1\{CustomerResource, CustomerCollection};
+
 
 class CustomerController extends Controller
 {
@@ -35,19 +35,13 @@ class CustomerController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
+     * 
+     * The StoreRequest is an validation to data request
      */
     public function store(StoreCustomerRequest $request)
     {
-        //
+        dd(new CustomerResource(Customer::create($request->all())));
     }
 
     /**
@@ -69,15 +63,9 @@ class CustomerController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Customer $customer)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
+     * 
+     * The UpdateRequest is an validation to data request
      */
     public function update(UpdateCustomerRequest $request, Customer $customer)
     {
