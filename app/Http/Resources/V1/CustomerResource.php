@@ -16,6 +16,9 @@ class CustomerResource extends JsonResource
      *
      * @return array<string, mixed>
      */
+
+    //  the key invoices only is displayed when include invoice is called with all the  invoices resource
+    //  'whenLoaded' or called invoices is loaded in this new response
     public function toArray(Request $request): array
     {
         return [
@@ -26,6 +29,7 @@ class CustomerResource extends JsonResource
             'city'       => $this->city,
             'state'      => $this->state,
             'postalCode' => $this->postal_code,
+            'invoices'   => InvoiceResource::collection($this->whenLoaded('invoices')),
         ];
     }
 }

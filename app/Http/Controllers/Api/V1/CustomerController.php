@@ -17,18 +17,21 @@ class CustomerController extends Controller
      */
     public function index(Request $request)
     {
+        // inlude invoices
+        $includeInvoices = $request->query('includeInvoices');
+
         // filter
         $filter = new CustomerFilter();
         // array of array is for simultaneous and advanced querys
-        $queryItems = $filter->transform($request); // [['column', 'operator', 'value']]
+        $filterItems = $filter->transform($request); // [['column', 'operator', 'value']]
 
-        if (count($queryItems) == 0) {
-            return new CustomerCollection(Customer::paginate());
-        } else {
-            // keeping the filter on url with append
-            $customer = Customer::where($queryItems)->paginate();
-            return new CustomerCollection($customer->appends($request->query()));
+        $customers = Customer::where($filterItems);
+
+        if ($includeInvoices) {
+            $customers = $customers->with('invoices');
         }
+
+        return new CustomerCollection($customers->paginate()->appends($request->query()));
     }
 
     /**
@@ -52,6 +55,13 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
+        // include the invoices
+        $includeInvoices = request()->query('includeInvoices');
+
+        if ($includeInvoices === "true") {
+            return new CustomerResource($customer->loadMissing('invoices'));
+        }
+
         // old format
         // return $customer;
         // with new format modified by CustomerResource kk
