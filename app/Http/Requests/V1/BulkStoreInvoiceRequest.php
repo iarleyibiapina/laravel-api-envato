@@ -45,7 +45,7 @@ class BulkStoreInvoiceRequest extends FormRequest
         $data = [];
 
         foreach ($this->toArray() as $obj) {
-            // this id exists?
+            // this id exists?k
             $obj['customer_id']  = $obj['customerId']   ?? null;
             $obj['billed_dated'] = $obj['billedDated']  ?? null;
             $obj['paid_dated']   = $obj['paidDated']    ?? null;
