@@ -41,9 +41,9 @@ Route::get('/setup', function () {
             $user = Auth::user();
 
             // ignore this error 
-            $adminToken  =  $user->createToken('admin-token', ['create', 'update', 'delete']);
+            $adminToken  =  $user->createToken('admin-token',  ['create', 'update', 'delete']);
             $updateToken =  $user->createToken('update-token', ['create', 'update']);
-            $basicToken  =  $user->createToken('basic-token', ['readonly']);
+            $basicToken  =  $user->createToken('basic-token',  ['readonly']);
 
             // grapping the token hash
 

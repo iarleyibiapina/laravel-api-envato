@@ -12,7 +12,10 @@ class UpdateCustomerRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        $user = $this->user();
+        // authorize the user to create a customer (true if user exists already and can update)
+        // especifying the authorization example: 'invoice:update';
+        return $user <> null and $user->tokenCan('udpate');
     }
 
     /**
