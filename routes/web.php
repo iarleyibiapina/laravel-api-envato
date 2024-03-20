@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,7 +24,7 @@ Route::get('/', function () {
 
 Route::get('/setup', function () {
     $credentials = [
-        'email' => 'admin@amdin.com',
+        'email' => 'admin@admin.com',
         'password' => 'password'
     ];
 
@@ -54,6 +55,9 @@ Route::get('/setup', function () {
             ];
         }
     }
+    return [
+        "error" => "Invalid credentials",
+    ];
 });
 
 require __DIR__ . '/auth.php';
